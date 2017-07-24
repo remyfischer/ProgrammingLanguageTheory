@@ -52,7 +52,7 @@ public enum Token implements Patterned {
 
         IF("si"), THEN("alors"),  ELSE("sinon"), ELIF,   END("fin"),
 
-        WHILE("tantque"), DO("faire"), UNTIL,
+        WHILE("tantque"), DO("faire"), UNTIL("until"),
 
 
         PRINT("afficher"),

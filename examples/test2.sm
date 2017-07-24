@@ -1,0 +1,9 @@
+// Program to test do/until
+
+x = 1
+
+faire
+  x=x+1
+until x==3
+
+afficher x
