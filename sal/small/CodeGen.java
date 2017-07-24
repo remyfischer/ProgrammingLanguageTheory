@@ -75,12 +75,12 @@ public class CodeGen {
             }
          };
 
-		// this is the 'boiler plate' code into which generated code is inserted. 
+		// this is the 'boiler plate' code into which generated code is inserted.
 		// it is done this way to make it easier to change - and because Templater already existed!
 		String[] theText = new String[]{
             ".class public (~CLASSNAME~)\n\n",
             ".super java/lang/Object\n",
-            
+
             ".method public <init>()V\n",
             ".limit stack 10\n",
             "    aload_0\n",
@@ -94,21 +94,21 @@ public class CodeGen {
             ".limit locals (~LOCALS~)\n",
             ".end method\n",
             "\n" };
-            
+
           for(String aLine : theText) tr.render(aLine);
        }
 
 
-		// small method for checking int/string types 
+		// small method for checking int/string types
 
 	public static boolean isStringVar(Tree<Token> tree) {
 		if(! tree.isLeaf()) return false;
 		return isStringName(tree);
-	}	
+	}
 
 	final static boolean INT_TYPE = false;
 	final static boolean STR_TYPE = true;
-	
+
 
     /**
      * Generate Jasmin assembler from an AST.
@@ -121,9 +121,9 @@ public class CodeGen {
 
         if (tree == null) return;
         Token token = tree.token();
-        
+
         switch (token) {
- 
+
 			// generate code for a list of statements
             case STATEMENTLIST:
                 for(Tree<Token> tst: tree.allChildren()) writeStatementCode(tst);
@@ -136,18 +136,18 @@ public class CodeGen {
                 endScope();
 			}
 			return;
-			
-			
+
+
 			// individual statements
-			
-			case DECREMENT:  	
+
+			case DECREMENT:
 			case INCREMENT:
 				 { Tree<Token> var = tree.child(0);
 				   increment(var.toString(), (token == INCREMENT) ? 1 : -1);
-				  }		
+				  }
 				  return;
-			
- 
+
+
             case ASSIGN: {
 					Tree<Token> var = tree.child(0);
 					boolean stringVar = isStringVar(var);
@@ -158,19 +158,19 @@ public class CodeGen {
 						ErrorStream.log("Attempt to assign int value to string variable \'%s\'.\n", var.toString());
 					} else {
 						ErrorStream.log("Attempt to assign string value to int variable \'%s\'.\n", var.toString());
-					}	
+					}
 				}
                 return;
 
           case IF: {
 				beginScope();	// start a scope to cover the whole if
-                Label endIf = newLabel("END IF");  // label for this end-if 
+                Label endIf = newLabel("END IF");  // label for this end-if
                 int pairs = tree.children();	// (test then code)+
 				for(int i = 0; i < pairs; i += 2) {
 					Tree<Token> test = tree.child(i);
 					Tree<Token> code = tree.child(i+1);
 					if(test != null) {	// not 'else' part
-						Label nextTest = newLabel("NEXT TEST");  // for jump to next elif/else 		
+						Label nextTest = newLabel("NEXT TEST");  // for jump to next elif/else
 						writeExpressionCode(test, INT_TYPE);
 						ifFalse(nextTest);
 						writeStatementCode(code);
@@ -185,7 +185,7 @@ public class CodeGen {
                 }
             return;
 
-			
+
             case WHILE: { // also do/end
                 beginScope();
                 Label continueLabel = newLabel("NEXT LOOP");
@@ -193,7 +193,7 @@ public class CodeGen {
                 setLabel(continueLabel);	// jump back here for 'continue'
                 Tree<Token> testExpr = tree.child(0);
 				if(testExpr != null) {		// 'null' for do/end
-					writeExpressionCode(tree.child(0), INT_TYPE);  		// expression to test  
+					writeExpressionCode(tree.child(0), INT_TYPE);  		// expression to test
 					ifFalse(breakLabel);		// if not true, 'break'
 				}
                 writeStatementCode(tree.child(1)); 		// content of while/do
@@ -204,22 +204,29 @@ public class CodeGen {
             return;
 
            case UNTIL: {
-                beginScope();	
+                beginScope();
                 Label continueLabel = newLabel("NEXT LOOP");
                 Label breakLabel =    newLabel("EXIT LOOP");
                 Label startLabel =    newLabel("START LOOP");
                 setLabel(startLabel); 		//	jump to here exit conmdition isn't met
                 writeStatementCode(tree.child(1)); 		// contents of do/until loop
                 setLabel(continueLabel);	// 'continue' goes to just before the test
-                writeExpressionCode(tree.child(0), INT_TYPE);  		// code for test
-                ifFalse(startLabel);		// if test fails jump back to start
+                Tree<Token> testExpr = tree.child(0);
+		            if(testExpr != null) {		// 'null' for do/end
+	                 writeExpressionCode(testExpr, INT_TYPE);  		// expression to test
+		               ifFalse(breakLabel);		// if not true, 'break'
+	              } else {
+
+                  jump(startLabel);		// if test fails jump back to
+                  
+                } 		// code for test
                 setLabel(breakLabel);		// or continue here
                 endScope();
             }
             return;
 
 
-			case BREAK: 
+			case BREAK:
 			case CONTINUE:  {
 				 Label l = getLabel((token == BREAK) ? "EXIT LOOP" : "NEXT LOOP");
 				 if(l == null)
@@ -227,15 +234,15 @@ public class CodeGen {
 				 else
 					jump(l);
 				 return;
-			}	
-				
-                
+			}
+
+
             case PRINT: {
 				 boolean isString = writeExpressionCode(tree.child(0));
 				 emit(isString ? PRINT_STR : PRINT_INT);
                 return;
 			}
-                
+
 
             case READ_STR:
             case READ_INT: {
@@ -251,9 +258,9 @@ public class CodeGen {
 		boolean expIsString = writeExpressionCode(tree);
 		if(needsString != expIsString) emit(needsString ? TO_STR : LEN_STR);
 	}
-	
+
 	public static boolean writeExpressionCode(Tree<Token> tree) {
-		
+
 		Token token = tree.token();
 		int kids = tree.children();
 		if(kids == 0) {
@@ -265,24 +272,24 @@ public class CodeGen {
 		}
 		// write code for first child and check type
 		boolean child0IsString = writeExpressionCode(tree.child(0));
-		// Deal with unary operators 
+		// Deal with unary operators
 		switch(token) {
 			// unary numeric operations
             case NEGATE:
 				if(child0IsString) {
 					ErrorStream.log("Attempt to apply \'-\' to a string.\n");
 				}
-				else 
+				else
 					emit(NEGATE);
-					
-				return INT_TYPE;	// assuming an int was intended!	
-			//!!! Insert String operations here !!!		
-			
+
+				return INT_TYPE;	// assuming an int was intended!
+			//!!! Insert String operations here !!!
+
 			}
-			
+
 			// Now binary operations
 			boolean child1IsString = writeExpressionCode(tree.child(1));
-			
+
 			switch(token) {
             case LE:
             case LT:
@@ -296,7 +303,7 @@ public class CodeGen {
 							ErrorStream.log(" <string> %s <int> is illegal.\n", token);
 						} else {
 							emit(COMPARE_STR);	// compare strings
-							emit(ZERO);		// to give compare with 0		
+							emit(ZERO);		// to give compare with 0
 						}
 					} else /* child0 is an int */ {
 						if(child1IsString) {
@@ -319,11 +326,11 @@ public class CodeGen {
                     setLabel(ifFalse);
                 }
                 return INT_TYPE;	// int left on stack
-				
+
 			// String and integer operations
 			// !!!!! STRING OPS NOT YET COMPLETE !!!!
-            
-            case PLUS:		
+
+            case PLUS:
             case MINUS:
             case TIMES:
             case DIVIDE:
@@ -341,9 +348,6 @@ public class CodeGen {
 					return INT_TYPE; // and why not!
         }
     }
- 	
+
 
 }
-
-
-

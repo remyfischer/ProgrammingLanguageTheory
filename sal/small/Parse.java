@@ -115,8 +115,14 @@ public class Parse {
     public static Tree<Token> doStatement() {
       scan(); // skip the 'do' token
       Tree<Token> s = statementList();
-      mustBe(UNTIL);
-      return list(UNTIL, expression(), s);
+      if(skipToken(UNTIL)){
+
+        return list(UNTIL, expression(), s);
+
+      }
+      mustBe(END);
+      return list(UNTIL, null, s);
+
 
         // The operations needed here a similar to 'while' above
         // 1. get the next token

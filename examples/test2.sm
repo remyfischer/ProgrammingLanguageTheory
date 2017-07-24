@@ -4,6 +4,9 @@ x = 1
 
 faire
   x=x+1
-until x==3
+  si x==6 alors
+    casser
+  fin
+fin
 
 afficher x
