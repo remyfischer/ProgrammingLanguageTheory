@@ -2,17 +2,17 @@
 
 d=0
 
-while d == "y"
+tantque d == "y"
 
-  print "Enter a : "
-  read a
-  print "Enter b : "
-  read b
-  print "Enter c : "
-  read c
+  afficher "Enter a : "
+  lire a
+  afficher "Enter b : "
+  lire b
+  afficher "Enter c : "
+  lire c
 
   calc = a+b*c
 
 si calc == 7 alors
-  print a, " + ", b, " * ", c, " = ", calc
+  afficher a, " + ", b, " * ", c, " = ", calc
 fin
