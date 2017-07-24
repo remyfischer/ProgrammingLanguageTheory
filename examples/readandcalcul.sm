@@ -1,0 +1,18 @@
+// Program to read three number then do a simple calcul
+
+d=0
+
+while d == "y"
+
+  print "Enter a : "
+  read a
+  print "Enter b : "
+  read b
+  print "Enter c : "
+  read c
+
+  calc = a+b*c
+
+si calc == 7 alors
+  print a, " + ", b, " * ", c, " = ", calc
+fin
