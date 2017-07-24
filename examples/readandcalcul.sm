@@ -1,17 +1,13 @@
 // Program to read three number then do a simple calcul
 
-d=0
+afficher "Enter a : "
+lire a
+afficher "Enter b : "
+lire b
+afficher "Enter c : "
+lire c
 
-tantque d == "y"
-
-  afficher "Enter a : "
-  lire a
-  afficher "Enter b : "
-  lire b
-  afficher "Enter c : "
-  lire c
-
-  calc = a+b*c
+calc = a+b*c
 
 si calc == 7 alors
   afficher a, " + ", b, " * ", c, " = ", calc
