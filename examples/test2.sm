@@ -1,12 +1,15 @@
-// Program to test do/until
+// Program to test do/until or do/end (faire/jusqua or faire/fin)
 
 x = 1
 
 faire
   x=x+1
+  afficher "x = ", x
   si x==6 alors
     casser
   fin
 fin
+
+afficher "\n"
 
 afficher x
