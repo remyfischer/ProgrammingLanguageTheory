@@ -20,6 +20,10 @@ import static sal.small.Tree.*;
  */
 
 package sal.small;
+import java.util.EnumSet;
+
+import static sal.small.Token.*;
+import static sal.small.Tree.*;
 
 /**  Reads the source and generates an AST (abstract syntax tree). There is a separate method for each grammar rule.
  * Each method called returns an AST for the statement it has processed.
@@ -146,7 +150,6 @@ public class Parse {
 		// a while statement with no test
 
 		// 7. and delete the line 'return null;' after this one
-		return null;
     }
 
 
