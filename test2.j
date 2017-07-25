@@ -20,6 +20,8 @@ START_LOOP#2:
   invokestatic sal/Library/print(Ljava.lang.String;)V
   iload 1
   invokestatic sal/Library/print(I)V
+  ldc " "
+  invokestatic sal/Library/print(Ljava.lang.String;)V
   iload 1
   ldc 6
   if_icmpeq TRUE_VAL#5
@@ -38,9 +40,33 @@ NEXT_LOOP#0:
 EXIT_LOOP#1:
   ldc "\n"
   invokestatic sal/Library/print(Ljava.lang.String;)V
+  ldc "fin de boucle : x = "
+  invokestatic sal/Library/print(Ljava.lang.String;)V
   iload 1
   invokestatic sal/Library/print(I)V
+  ldc 1
+  istore 2
+START_LOOP#9:
+  iload 2
+  ldc 2
+  iadd
+  istore 2
+NEXT_LOOP#7:
+  iload 2
+  ldc 9
+  if_icmpeq TRUE_VAL#10
+  iconst_0
+  goto FALSE_VAL#11
+TRUE_VAL#10:
+  iconst_1
+FALSE_VAL#11:
+  ifeq START_LOOP#9
+EXIT_LOOP#8:
+  ldc "fin de boucle : y = "
+  invokestatic sal/Library/print(Ljava.lang.String;)V
+  iload 2
+  invokestatic sal/Library/print(I)V
     return
-.limit locals 2
+.limit locals 3
 .end method
 

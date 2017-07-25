@@ -4,7 +4,7 @@ x = 1
 
 faire
   x=x+1
-  afficher "x = ", x
+  afficher "x = ", x, " "
   si x==6 alors
     casser
   fin
@@ -12,4 +12,12 @@ fin
 
 afficher "\n"
 
-afficher x
+afficher "fin de boucle : x = ", x, "\n"
+
+y = 1
+
+faire
+  y=y+2
+jusqua y==9
+
+afficher "fin de boucle : y = ", y

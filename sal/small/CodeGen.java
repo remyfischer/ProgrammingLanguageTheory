@@ -215,7 +215,7 @@ public class CodeGen {
            Tree<Token> testExpr = tree.child(0);
             if(testExpr != null) {		// 'null' for do/end
                writeExpressionCode(testExpr, INT_TYPE);  		// expression to test
-               ifFalse(breakLabel);		// if not true, 'break'
+               ifFalse(startLabel);		// if not true, 'break'
             } else {
 
              jump(startLabel);		// if test fails jump back to
