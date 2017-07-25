@@ -1,4 +1,10 @@
 /*
+
+import java.util.EnumSet;
+import static sal.small.Main.*;
+import static sal.small.Token.*;
+import static sal.small.Tree.*;
+
  * This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
  *     the Free Software Foundation, either version 3 of the License, or
@@ -14,12 +20,6 @@
  */
 
 package sal.small;
-
-import java.util.EnumSet;
-
-import static sal.small.Tree.*;
-import static sal.small.Main.*;
-import static sal.small.Token.*;
 
 /**  Reads the source and generates an AST (abstract syntax tree). There is a separate method for each grammar rule.
  * Each method called returns an AST for the statement it has processed.
@@ -63,7 +63,7 @@ public class Parse {
 			case IDENTIFIER:	aStatement = assignment(); 		break;
 			case READ:          aStatement = readStatement(); 	break;
 			case BREAK:
-			case CONTINUE:		
+			case CONTINUE:
 								aStatement = leaf(token);
 								scan();
 								break;
@@ -86,11 +86,11 @@ public class Parse {
         mustBe(THEN);
         t = list(IF, t, statementList());
 		// insert code for any number of 'elif's here
-		
+
         if(skipToken(ELSE)) {
 			t.addChild(null);			 // 'no test'
 			t.addChild(statementList()); // 'else' statements
-		}	
+		}
         mustBe(END);
         return t;
     }
@@ -114,27 +114,27 @@ public class Parse {
      */
     public static Tree<Token> doStatement() {
         // The operations needed here a similar to 'while' above
-        // 1. get the next token 
-        
-        // 2. declare an AST (Tree<Token>) object called body and 
+        // 1. get the next token
+
+        // 2. declare an AST (Tree<Token>) object called body and
         //    set it by calling statementList() and assigning the result to it.
-		
+
         // 3.  your program has read everything upto either 'until' or 'end'
 		// check if the next token is UNTIL, if so skip it
 		// (see treatement of 'else' in 'if' statement above)
-		
+
 		// 4. if until is found, return the rest of the AST by using
 		//  return list(UNTIL, expression(), body)
 		// do you understand what is happening?   What will be the AST
 		//  of a simple do/until example?
 
-		// 5. if UNTIL wasn't found the next token should be END (use mustBe) 	
-		//  
-		// 6. Whether END was found or not, 
-		// return list(WHILE, null, body) 
+		// 5. if UNTIL wasn't found the next token should be END (use mustBe)
+		//
+		// 6. Whether END was found or not,
+		// return list(WHILE, null, body)
 		// a while statement with no test
-		
-		// 7. and delete the line 'return null;' after this one  
+
+		// 7. and delete the line 'return null;' after this one
 		return null;
     }
 
@@ -159,7 +159,7 @@ public class Parse {
      * Grammar rules {@code printStatement  : 'print' printItem (',' printItem )* }
      * and          {@code printItem       : stringLiteral | expression }
      * @return AST for print statement
-     * 
+     *
      * The print statement is made into a list of individual prints
      */
     public static Tree<Token> printStatement() {
@@ -204,7 +204,7 @@ public class Parse {
 
     // start with lowest priority <, <= etc
 
- 
+
  private static final EnumSet<Token> RELATIONALOPS = EnumSet.of(LE, LT, GE, GT, EQ, NE);
      /**
      *  Grammar rule {@code  relopExpression : addExpression [ ('<' | '<=' | '==' | '!=' | '<=' | '<' ) addExpression ] }
@@ -236,7 +236,7 @@ public class Parse {
         return t;
     }
 
-    
+
     private static final EnumSet<Token> MULTOPS = EnumSet.of(TIMES, DIVIDE, MOD, SHR, SHL, SHRS);
 
     /**
@@ -266,23 +266,28 @@ public class Parse {
                             t = expression();
                             mustBe(RP);
                             return t;
-            
-			
+
+
             case IDENTIFIER:  t = leaf(token, value); break;
 
 
-            case NUMBER :	
+            case NUMBER :
 							{	if(value.charAt(0) == '#') {
 									// convert string after '#' to binary, then back to decimal as a string
 									value = Integer.toString(Integer.valueOf(value.substring(1), 16));
 								}
 								t = leaf(token, value);
-								break; 
+								break;
 							}
-			
-	
+
+
             case MINUS:     scan();	// step over operator
-							return list(token, term()); 
+							return list(NEGATE, term());
+
+            case TO_INT:              
+            case TO_STR:
+            				scan();
+            				return list(token, term());
 
             default :       mustBe(IDENTIFIER, NUMBER, MINUS,
 									LP, TO_INT, TO_STR, LEN_STR);  // didn't find the start of an expression - there has to be one;
@@ -295,4 +300,3 @@ public class Parse {
 
 
 }
-

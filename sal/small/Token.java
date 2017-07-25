@@ -47,7 +47,7 @@ public enum Token implements Patterned {
 
         NUMBER(some(in(DEC)), "<number>"),
 
-        IDENTIFIER(ALPHA+any(in("A-Za-z0-9_")), "<identifier>"),
+        IDENTIFIER(ALPHA+any(in("[A-Za-z0-9_][$?]")), "<identifier>"),
         STRING(DQUOTE+any(notIn(DQUOTE)) + DQUOTE, "<string>"),
 
         IF("si"), THEN("alors"),  ELSE("sinon"), ELIF,   END("fin"),
