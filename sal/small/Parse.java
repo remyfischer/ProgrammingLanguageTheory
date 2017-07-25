@@ -282,8 +282,9 @@ public class Parse {
                             return t;
 
 
+            case STRING: 	
             case IDENTIFIER:  t = leaf(token, value); break;
-
+            
 
             case NUMBER :
 							{	if(value.charAt(0) == '#') {
