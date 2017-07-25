@@ -146,11 +146,7 @@ public class Parse {
 		// a while statement with no test
 
 		// 7. and delete the line 'return null;' after this one
-<<<<<<< HEAD
 		return null;
-=======
-
->>>>>>> 5d47dd71489f7a59d3952e2d3c123b6c5733abb3
     }
 
 
