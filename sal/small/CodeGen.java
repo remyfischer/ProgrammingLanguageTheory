@@ -285,7 +285,13 @@ public class CodeGen {
 
 				return INT_TYPE;	// assuming an int was intended!
 			//!!! Insert String operations here !!!
-
+            case TO_STR: 
+            	emit(TO_STR);
+            	return STR_TYPE;
+            	
+            case TO_INT:
+            	emit(TO_INT);
+            	return INT_TYPE;
 			}
 
 			// Now binary operations

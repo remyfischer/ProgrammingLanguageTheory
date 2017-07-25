@@ -1,0 +1,16 @@
+a$="toto"
+afficher a$
+
+a=2
+afficher a
+
+quentin$ = "salut"
+
+afficher quentin$
+afficher "\n"
+
+var$ = str(2017)
+afficher var$
+
+test = int("56")
+afficher test
