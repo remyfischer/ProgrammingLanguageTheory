@@ -1,7 +1,13 @@
 PARTIE I : 1.1 Create a French Programming Language (terminé)
 PARTIE II : 2.1 do/end, do/until (terminé)
 PARTIE III :
-	3.1 Specification :
-	3.2 How to do it :
+	3.1 Specification (terminé)
+	3.2 How to do it : 
+		3.2.1 Update Token.java (terminé)
+		3.2.2 Update Parse.java
+		3.2.3 Look at CodeGen.java
+		3.2.4 Test
+
+
 
  
