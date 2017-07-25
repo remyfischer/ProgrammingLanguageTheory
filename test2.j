@@ -16,6 +16,10 @@ START_LOOP#2:
   ldc 1
   iadd
   istore 1
+  ldc "x = "
+  invokestatic sal/Library/print(Ljava.lang.String;)V
+  iload 1
+  invokestatic sal/Library/print(I)V
   iload 1
   ldc 6
   if_icmpeq TRUE_VAL#5
@@ -32,6 +36,8 @@ END_IF#3:
 NEXT_LOOP#0:
   goto START_LOOP#2
 EXIT_LOOP#1:
+  ldc "\n"
+  invokestatic sal/Library/print(Ljava.lang.String;)V
   iload 1
   invokestatic sal/Library/print(I)V
     return
