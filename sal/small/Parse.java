@@ -113,6 +113,17 @@ public class Parse {
      * @return AST for ifStatement
      */
     public static Tree<Token> doStatement() {
+      scan(); // skip the 'do' token
+      Tree<Token> s = statementList();
+      if(skipToken(UNTIL)){
+
+        return list(UNTIL, expression(), s);
+
+      }
+      mustBe(END);
+      return list(UNTIL, null, s);
+
+
         // The operations needed here a similar to 'while' above
         // 1. get the next token
 
@@ -135,7 +146,11 @@ public class Parse {
 		// a while statement with no test
 
 		// 7. and delete the line 'return null;' after this one
+<<<<<<< HEAD
 		return null;
+=======
+
+>>>>>>> 5d47dd71489f7a59d3952e2d3c123b6c5733abb3
     }
 
 
