@@ -1,0 +1,3 @@
+afficher int("4")
+
+afficher int("4") + int("4")
