@@ -1,0 +1,9 @@
+afficher "Test String : \n"
+str1$ = "Salut" << 3
+afficher str1$ + " \n"
+str2$ = "Salut" >> 3
+afficher str2$
+afficher "\n Test integer : \n"
+afficher 50 << 1
+afficher " \n"
+afficher 50 >> 1
