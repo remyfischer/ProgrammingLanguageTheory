@@ -111,7 +111,7 @@ public class CodeGen {
 
 	/**
 	 * Generate Jasmin assembler from an AST.
-	 * 
+	 *
 	 * @param t
 	 *            The AST.
 	 *
@@ -237,6 +237,14 @@ public class CodeGen {
 			else
 				jump(l);
 			return;
+		}
+
+		case ENDLINE:{
+
+				emit(STRING, "\"\\n\"");
+				emit(PRINT_STR);
+				break;
+
 		}
 
 		case PRINT: {

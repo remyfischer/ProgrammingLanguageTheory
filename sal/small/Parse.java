@@ -64,8 +64,10 @@ public class Parse {
 			case WHILE:         aStatement = whileStatement(); 	break;
 			case DO:			aStatement = doStatement(); 	break;
 			case PRINT:         aStatement = printStatement(); 	break;
+      case PRINTLN:       aStatement = printlnStatement(); break;
 			case IDENTIFIER:	aStatement = assignment(); 		break;
 			case READ:          aStatement = readStatement(); 	break;
+      case ENDLINE:
 			case BREAK:
 			case CONTINUE:
 								aStatement = leaf(token);
@@ -181,12 +183,20 @@ public class Parse {
         Tree<Token> printList = list(STATEMENTLIST);
         do { Tree<Token> printExpr;
 				printExpr = expression();
-			
+
 			printList.addChild(list(PRINT, printExpr));
         } while (skipToken(COMMA));
 
         return printList;
         }
+
+    public static Tree<Token> printlnStatement(){
+
+      Tree<Token> print = printStatement();
+      print.addChild(list(PRINT, leaf(STRING, "\"\\n\"")));
+      return print;
+
+    }
 
     /**
      * Grammar rule {@code assignStatement : name '=' expression }
@@ -290,6 +300,7 @@ public class Parse {
 								t = leaf(token, value);
 								break;
 							}
+
 
             case LEN_STR:
             				scan();
