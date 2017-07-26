@@ -1,0 +1,12 @@
+a = 3
+b = 2
+afficher a-b
+
+afficher "\n"
+
+var$ = "hi "
+var2$ = "test"
+
+afficher var$-var2$
+
+afficher "je suis ici"

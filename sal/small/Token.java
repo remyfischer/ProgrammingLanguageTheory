@@ -45,7 +45,7 @@ public enum Token implements Patterned {
         EOF,
         UNMATCHED,
 
-        NUMBER(some(in(DEC)), "<number>"),
+        NUMBER(some(in(DEC)) , "<number>"),
 
         IDENTIFIER(ALPHA+any(in("[A-Za-z0-9_][$?]")), "<identifier>"),
         STRING(DQUOTE+any(notIn(DQUOTE)) + DQUOTE, "<string>"),
@@ -53,8 +53,6 @@ public enum Token implements Patterned {
         IF("si"), THEN("alors"),  ELSE("sinon"), ELIF,   END("fin"),
 
         WHILE("tantque"), DO("faire"), UNTIL("jusqua"),
-
-
         PRINT("afficher"),
         READ("lire"),
         ASSIGN("="+notBefore("="), "="),

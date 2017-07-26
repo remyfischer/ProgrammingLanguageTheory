@@ -354,7 +354,6 @@ public class CodeGen {
 					emit(PLUS);
 					return INT_TYPE;
 				} else {
-					System.out.println("Welom");
 					emit(SWAP);
 					emit(TO_STR);
 					emit(SWAP);
@@ -363,10 +362,11 @@ public class CodeGen {
 			}
 		}
 		case MINUS:
+			ErrorStream.log("Minus cannot be used for tow strings\n", token);
 		case TIMES:
 		case DIVIDE:
 		case MOD:
-		case SHL:
+		case SHL:			
 		case SHR:
 		case SHRS: {
 			emit(token);

@@ -1,0 +1,25 @@
+afficher "Here is a global test file. Press 0 to continue\n"
+a = 1
+faire
+	lire a
+	si a==0 alors
+		casser
+	fin
+fin
+
+afficher "loop and french keywords should work. Now, let's test the part 3\n"
+var$ = "hi"
+var = 3
+
+afficher var$ + " is a string (this is a concatenation)\n"
+afficher "la concatenation fonctionne"
+
+afficher "to_str : " + str(2017)
+
+afficher "\n2017 on the top is an integer converted to a string"
+
+afficher "\nto_int : " + int("2017")
+
+afficher "\n2017 on the top is a string converted to an integer\n"
+
+
