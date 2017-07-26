@@ -294,6 +294,9 @@ public class Parse {
 								t = leaf(token, value);
 								break;
 							}
+							
+            case LEN_STR:
+            				
 
 
             case MINUS:     scan();	// step over operator
