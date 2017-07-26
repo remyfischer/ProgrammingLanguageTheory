@@ -180,12 +180,8 @@ public class Parse {
         scan(); // skip the word 'print'
         Tree<Token> printList = list(STATEMENTLIST);
         do { Tree<Token> printExpr;
-			if(currentToken() == STRING) {
-				printExpr = leaf(STRING, currentText());
-				scan();
-			} else {
 				printExpr = expression();
-			}
+			
 			printList.addChild(list(PRINT, printExpr));
         } while (skipToken(COMMA));
 
