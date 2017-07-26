@@ -1,0 +1,12 @@
+str1$ = "salut "
+str2$ = "mec"
+var$ = "salut " + "Calliste"
+
+concat$ = str1$ + str2$
+afficher concat$
+afficher var$
+
+afficher "\n"
+var$ = "hi it's " + str(2017)
+
+afficher var$

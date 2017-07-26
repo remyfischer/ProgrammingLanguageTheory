@@ -338,6 +338,27 @@ public class CodeGen {
 			// !!!!! STRING OPS NOT YET COMPLETE !!!!
 
             case PLUS:
+            {
+            	if (child0IsString) {
+            		if(!child1IsString) { //premier terme string mais pas second terme
+            			emit(TO_STR);
+            			return STR_TYPE;
+            		} else { //si le child1 est string alors on traite la concat
+            			emit(CONCAT);
+            			return STR_TYPE;
+            		}
+            	} else {
+            		if(!child1IsString) { //si les deux termes ne sont pas des strings
+            			emit(PLUS);
+            			return INT_TYPE;
+            		} else { 
+            			emit(SWAP);
+            			emit(TO_STR);
+            			emit(SWAP);
+            			return STR_TYPE;
+            		}
+            	}
+            }            	            
             case MINUS:
             case TIMES:
             case DIVIDE:
