@@ -9,4 +9,6 @@ afficher var$
 afficher "\n"
 var$ = "hi it's " + str(2017)
 
-afficher var$
+afficher var$ + " it's cool\n"
+
+afficher "test : " + var$
