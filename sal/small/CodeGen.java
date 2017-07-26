@@ -276,22 +276,24 @@ public class CodeGen {
 		// Deal with unary operators
 		switch(token) {
 			// unary numeric operations
-            case NEGATE:
-				if(child0IsString) {
-					ErrorStream.log("Attempt to apply \'-\' to a string.\n");
-				}
-				else
-					emit(NEGATE);
-
-				return INT_TYPE;	// assuming an int was intended!
+        case NEGATE:
+          if(child0IsString) {
+					         ErrorStream.log("Attempt to apply \'-\' to a string.\n");
+          }
+          else
+            emit(NEGATE);
+            return INT_TYPE;	// assuming an int was intended!
 			//!!! Insert String operations here !!!
-            case TO_STR: 
-            	emit(TO_STR);
-            	return STR_TYPE;
-            	
-            case TO_INT:
-            	emit(TO_INT);
-            	return INT_TYPE;
+        case TO_STR:
+          emit(TO_STR);
+          return STR_TYPE;
+
+        case TO_INT:
+          emit(TO_INT);
+        	return INT_TYPE;
+        case LEN_STR:
+          emit(LEN_STR);
+          return INT_TYPE;
 			}
 
 			// Now binary operations
@@ -351,14 +353,14 @@ public class CodeGen {
             		if(!child1IsString) { //si les deux termes ne sont pas des strings
             			emit(PLUS);
             			return INT_TYPE;
-            		} else { 
+            		} else {
             			emit(SWAP);
             			emit(TO_STR);
             			emit(SWAP);
             			return STR_TYPE;
             		}
             	}
-            }            	            
+            }
             case MINUS:
             case TIMES:
             case DIVIDE:

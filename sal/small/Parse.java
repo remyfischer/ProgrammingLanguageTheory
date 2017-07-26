@@ -282,9 +282,9 @@ public class Parse {
                             return t;
 
 
-            case STRING: 	
+            case STRING:
             case IDENTIFIER:  t = leaf(token, value); break;
-            
+
 
             case NUMBER :
 							{	if(value.charAt(0) == '#') {
@@ -294,15 +294,17 @@ public class Parse {
 								t = leaf(token, value);
 								break;
 							}
-							
+
             case LEN_STR:
-            				
+            				scan();
+                    return list(LEN_STR, term());
+
 
 
             case MINUS:     scan();	// step over operator
 							return list(NEGATE, term());
 
-            case TO_INT:              
+            case TO_INT:
             case TO_STR:
             				scan();
             				return list(token, term());

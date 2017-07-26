@@ -1,0 +1,3 @@
+str1$ = "Salut"
+a = len(str1$)
+afficher a
