@@ -1,3 +1,7 @@
+// testing the string concatenation
+// testing the << and  >> operator for int
+// testing the println (afficherln) and endofline (sdl)
+
 str1$ = "Laurent Toson"
 str2$ =  "This test use the word "+ str1$
 afficher str2$ + " : "
@@ -5,9 +9,6 @@ sdl
 a = len(str1$)
 afficher "Length of the string, a = ", a
 sdl
-
-// test of "<<" and ">>" operator for int
-
 afficher "test of << and >> operator for int"
 sdl
 afficherln "a << 1 = ", a << 1
