@@ -12,4 +12,5 @@ PARTIE III :
 3.2.1 dans le fichier Code.java nous avons modifié un élement dans la ligne 136 : libCall(TO_INT, 	"toInt(~)I");	 pour que le TO_INT reçoive finalement un string en param et sorte un INT en sortie.
 3.2.1 dans le fichier CodeGen.java nous avons ajouté la gestion des tokens 
 
- 
+Concaténation : 
+	--> Modification du fichier CodeGen dans la fonction writeExpressionCode au niveau de l'opérateur 'PLUS'
