@@ -370,12 +370,39 @@ public class CodeGen {
 				}
 			}
 		}
+		case SHL:
+			if (child0IsString && !child1IsString) {
+
+				emit(LEFT_STR);
+				return STR_TYPE;
+			} else if (child0IsString && child1IsString){
+				// error we can't do that
+				ErrorStream.log("We can't use << operator with a string at both ends", token);
+			} else if (!child0IsString && child1IsString){
+				// Case where the left child is an integer and his sibilings is a String
+				ErrorStream.log("We can't use << operator with a string at the left sideof the operation", token);
+			} else {
+				emit(token);
+				return INT_TYPE;
+			}
+		case SHR:
+		if (child0IsString && !child1IsString) {
+			emit(RIGHT_STR);
+			return STR_TYPE;
+		} else if (child0IsString && child1IsString){
+			// error we can't do that
+			ErrorStream.log("We can't use >> operator with a string at both ends", token);
+		} else if (!child0IsString && child1IsString){
+			// Case where the left child is an integer and his sibilings is a String
+			ErrorStream.log("We can't use >> operator with a string at the left sideof the operation", token);
+		} else {
+			emit(token);
+			return INT_TYPE;
+		}
 		case MINUS:
 		case TIMES:
 		case DIVIDE:
 		case MOD:
-		case SHL:
-		case SHR:
 		case SHRS: {
 			emit(token);
 		}
