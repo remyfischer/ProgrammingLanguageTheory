@@ -73,5 +73,6 @@ For the part II, we did the DO-UNTIL and DO-END exercice but with french words.
 
 We did all the part III.
 
-***PART IV****
+***PART IV***
+
 We added new feature called 'sdl' => "saut de ligne" in french which means a return to the next line, like println.
