@@ -58,7 +58,7 @@ We advise you to use the global_file_test.sm, it contains test for every task th
 Feel free to contact us if there is anything you don't understand, if you want for info or anything else.
 
 
-**About parts I and II**
+**About parts**
 ------------------------
 
 ***Part I***
@@ -69,3 +69,9 @@ For the part I, we did the first exercise which consisted to translate english k
 
 For the part II, we did the DO-UNTIL and DO-END exercice but with french words. 
 
+**Part III**
+
+We did all the part III.
+
+***PART IV****
+We added new feature called 'sdl' => "saut de ligne" in french which means a return to the next line, like println.
