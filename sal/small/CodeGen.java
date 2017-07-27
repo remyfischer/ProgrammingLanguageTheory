@@ -239,6 +239,14 @@ public class CodeGen {
 			return;
 		}
 
+		case ENDLINE:{
+
+				emit(STRING, "\"\\n\"");
+				emit(PRINT_STR);
+				break;
+
+		}
+
 		case PRINT: {
 			boolean isString = writeExpressionCode(tree.child(0));
 			emit(isString ? PRINT_STR : PRINT_INT);

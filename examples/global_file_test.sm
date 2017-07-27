@@ -70,3 +70,7 @@ var3 = 3+4
 afficher "test addition with variables 3+4 :  "
 afficher var3
 afficher "\n"
+
+afficher "end of line, return to next line with keywork (additional feature) : "
+sdl
+afficher "here is a new line"
