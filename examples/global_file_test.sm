@@ -59,3 +59,14 @@ afficher "\n"
 
 afficher 7 + " hello\n"
 
+
+afficher "addition test 3+4 : "
+afficher 3+4
+afficher "\n"
+
+var = 3
+var2 = 4
+var3 = 3+4
+afficher "test addition with variables 3+4 :  "
+afficher var3
+afficher "\n"
