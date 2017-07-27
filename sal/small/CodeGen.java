@@ -343,6 +343,7 @@ public class CodeGen {
 				if (!child1IsString) { // premier terme string mais pas second
 										// terme
 					emit(TO_STR);
+					emit(CONCAT);
 					return STR_TYPE;
 				} else { // si le child1 est string alors on traite la concat
 					emit(CONCAT);
@@ -350,13 +351,14 @@ public class CodeGen {
 				}
 			} else {
 				if (!child1IsString) { // si les deux termes ne sont pas des
-										// strings
+										// strings					
 					emit(PLUS);
 					return INT_TYPE;
 				} else {
 					emit(SWAP);
 					emit(TO_STR);
 					emit(SWAP);
+					emit(CONCAT);
 					return STR_TYPE;
 				}
 			}
@@ -395,8 +397,6 @@ public class CodeGen {
 		case TIMES:
 		case DIVIDE:
 		case MOD:
-		case SHL:			
-		case SHR:
 		case SHRS: {
 			emit(token);
 		}
