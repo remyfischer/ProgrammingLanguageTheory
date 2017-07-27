@@ -58,4 +58,14 @@ We advise you to use the global_file_test.sm, it contains test for every task th
 Feel free to contact us if there is anything you don't understand, if you want for info or anything else.
 
 
+**About parts I and II**
+------------------------
+
+***Part I***
+--------
+For the part I, we did the first exercise which consisted to translate english keywords to french keywords. 
+
+***Part II***
+---------
+For the part II, we did the DO-UNTIL and DO-END exercice but with french words. 
 
